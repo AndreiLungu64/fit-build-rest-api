@@ -1,0 +1,6 @@
+20250323	14:23:26	a33495d7-fb63-48ce-961a-ce3c3d73188b	GET	undefined	/new-page.html
+20250323	14:23:26	38d7296b-336d-4c90-bd6f-f9f5c09e7cdb	GET	undefined	/css/style.css
+20250323	14:23:26	7657d8a2-df33-4474-b793-c778928310a6	GET	undefined	/img/img1.jpg
+20250323	15:43:47	c176af17-0a13-419e-ac19-7a1f149d68d1	GET	undefined	/new-page.html
+20250323	15:43:47	7123e839-fb47-405a-9a79-75689f53122e	GET	undefined	/img/img1.jpg
+20250323	15:43:47	ed9660bf-4bc9-45ef-b7dc-9d16f9a61dc9	GET	undefined	/css/style.css
