@@ -2,6 +2,7 @@ import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 
 import json from "../model/employees.json" with { type: "json" };
 import { rm } from "fs";
+import { parse } from "path";
 // const data: { employees: typeof json } = { employees: json };
 
 const data = {
@@ -14,10 +15,6 @@ const data = {
 const getAllEmployees = (req: Request, res: Response) => {
   res.json(data.employees);
 };
-
-const getEmployee = (req: Request, res: Response) => {
-    res.json({"id" : req.params.id});
-}
 
 const createNewEmployee = (req: Request, res: Response)  => {
    const newEmployee = {
@@ -50,7 +47,21 @@ const updateEmployee = (req: Request, res: Response) => {
 }
 
 const deleteEmployee = (req: Request, res: Response)=> {
-    res.json({"id" : req.body.id});
+    const employee = data.employees.find(emp => emp.id === parseInt(req.body.id));
+    if(!employee){
+        return res.status(400).json({"message": `Employee ID ${req.body.id} not found`});
+    }
+    const filteredArray = data.employees.filter(emp => emp.id !== parseInt(req.body.id));
+    data.setEmployees([...filteredArray]);
+    res.json(employee);
+}
+
+const getEmployee = (req: Request, res: Response) => {
+    const employee = data.employees.find(emp => emp.id === parseInt(req.params.id));
+    if(!employee){
+        return res.status(400).json({"message":  `Employee ID ${req.params.id} not found`})
+    }
+    res.json(employee);
 }
 
 const employeesController = {getAllEmployees, getEmployee, createNewEmployee, updateEmployee, deleteEmployee}
