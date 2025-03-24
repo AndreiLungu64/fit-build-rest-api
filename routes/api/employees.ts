@@ -12,7 +12,7 @@ const router = express.Router();
 
 //chain after route() the http methods we want to provide for the same route
 router.route("/")
-    .get(employeesController.createNewEmployee)
+    .get(employeesController.getAllEmployees)
     .post(employeesController.createNewEmployee)
     .put(employeesController.updateEmployee)
     .delete(employeesController.deleteEmployee);

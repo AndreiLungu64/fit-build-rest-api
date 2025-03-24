@@ -85,3 +85,8 @@
 20250324	16:13:40	a9c1c938-5090-4a4a-b2e6-c891bf76c023	GET	undefined	/employees/1
 20250324	16:14:46	c627efa7-c29f-4a20-9e13-eea540939c3d	GET	undefined	/employees/1
 20250324	16:14:51	edfdcb44-da5f-4c7d-8d66-c05bc048bf3a	GET	undefined	/employees/:1
+20250324	20:35:14	bc117fb9-694d-4902-ae21-76269805194e	GET	undefined	/employees
+20250324	20:35:21	6b5014c5-5c71-49a7-9c23-a320c3ab8e6d	GET	undefined	/employees
+20250324	20:35:21	34322bb3-a1af-4e8d-bd8e-f3b9955adaa3	GET	undefined	/employees
+20250324	20:35:51	88a0a8c4-68a9-4933-af77-4009b6ccf777	GET	undefined	/employees
+20250324	20:35:52	db9c133a-5d5b-4cf1-86e0-665cccff98c0	GET	undefined	/employees
