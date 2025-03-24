@@ -10,7 +10,6 @@ import { errorHandler } from "./middleware/errorHandler.js";
 import cors from "cors";
 import { corsOptions } from "./config/corsOptions.js";
 
-import subdirRouter from "./routes/subdir.js";
 import rootRouter from "./routes/root.js";
 import employeesRouter from "./routes/api/employees.js";
 
@@ -35,12 +34,9 @@ app.use(express.json());
 
 ///built-in middleware for to serve  static files from the public folder, if no path mentioned it defaults for "/"
 app.use("/", express.static(path.join(__dirname, "/public")));
-//tell express to use the public folder for "/subdir" path also
-app.use("/subdir", express.static(path.join(__dirname, "/public")));
 
 //#2.Routers#
 app.use("/", rootRouter);
-app.use("/subdir", subdirRouter); //
 app.use("/employees", employeesRouter); //doesnt need the static files middleware because an api serves json
 
 // #3.Unknow Routes Handler# (catch all 404)
