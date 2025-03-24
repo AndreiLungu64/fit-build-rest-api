@@ -3,12 +3,16 @@ import express from "express";
 import { fileURLToPath } from "url";
 import path from "path";
 import { dirname } from "path";
+
 import { logger } from "./middleware/logEvents.js";
 import { errorHandler } from "./middleware/errorHandler.js";
+
 import cors from "cors";
 import { CorsOptions } from "cors";
+
 import subdirRouter from "./routes/subdir.js";
 import rootRouter from "./routes/root.js";
+import employeesRouter from "./routes/api/employees.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -37,7 +41,8 @@ app.use("/subdir", express.static(path.join(__dirname, "/public"))); //tell expr
 
 //#2.Routers#
 app.use("/", rootRouter);
-app.use("/subdir", subdirRouter);
+app.use("/subdir", subdirRouter); //
+app.use("/employees", employeesRouter); //doesnt need the static files middleware because an api serves json
 
 // #3.Unknow Routes Handler#
 // Option 1: Simple catch-all for unknown routes
@@ -50,7 +55,7 @@ app.all("*", (req, res) => {
   /*this is a series of conditional checks to determine the preffered response format based on  client's accepted header
     is a property in the request header reffering to the preffered response type*/
   if (req.accepts("html")) {
-    res.sendFile(path.join(__dirname, "views", "404 .html"));
+    res.sendFile(path.join(__dirname, "views", "404.html"));
   } else if (req.accepts("json")) {
     res.json({ error: "404 Not Found" });
   } else {
