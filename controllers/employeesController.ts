@@ -24,7 +24,8 @@ const createNewEmployee = (req: Request, res: Response)  => {
    }
 
    if(!newEmployee.firstname || !newEmployee.lastname){ //if the data is incomplete return an error message
-    return res.status(400).json({"message" : "First and last name are required"});
+    res.status(400).json({"message" : "First and last name are required"});
+    return;
    }
 
    data.setEmployees([...data.employees, newEmployee]);//update data in db (here in json file)
@@ -34,7 +35,8 @@ const createNewEmployee = (req: Request, res: Response)  => {
 const updateEmployee = (req: Request, res: Response) => {
     const employee = data.employees.find(emp => emp.id === parseInt(req.body.id));
     if(!employee){
-        return res.status(400).json({"message" : `Employee ID ${req.body.id} not found`})
+        res.status(400).json({"message" : `Employee ID ${req.body.id} not found`});
+        return;
     }
 
     if(req.body.firstname) employee.firstname = req.body.firstname;
@@ -49,7 +51,8 @@ const updateEmployee = (req: Request, res: Response) => {
 const deleteEmployee = (req: Request, res: Response)=> {
     const employee = data.employees.find(emp => emp.id === parseInt(req.body.id));
     if(!employee){
-        return res.status(400).json({"message": `Employee ID ${req.body.id} not found`});
+        res.status(400).json({"message": `Employee ID ${req.body.id} not found`});
+        return;
     }
     const filteredArray = data.employees.filter(emp => emp.id !== parseInt(req.body.id));
     data.setEmployees([...filteredArray]);
@@ -59,7 +62,8 @@ const deleteEmployee = (req: Request, res: Response)=> {
 const getEmployee = (req: Request, res: Response) => {
     const employee = data.employees.find(emp => emp.id === parseInt(req.params.id));
     if(!employee){
-        return res.status(400).json({"message":  `Employee ID ${req.params.id} not found`})
+        res.status(400).json({"message":  `Employee ID ${req.params.id} not found`});
+        return;
     }
     res.json(employee);
 }
