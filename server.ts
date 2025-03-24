@@ -8,7 +8,7 @@ import { logger } from "./middleware/logEvents.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
 import cors from "cors";
-import { CorsOptions } from "cors";
+import { corsOptions } from "./config/corsOptions.js";
 
 import subdirRouter from "./routes/subdir.js";
 import rootRouter from "./routes/root.js";
@@ -21,30 +21,29 @@ const app = express();
 const PORT = process.env.PORT || 3500;
 
 //#1.Middlewares#
-const whitelist = ["https://yoursite.com", "http:127.0.0.1: 5500", "http://localhost:3500"]; //in production put here only your frontent url
-//origin is the name of the property cors expects, the parameter "origin" is the domain from where the request came
-const corsOptions: CorsOptions = {
-  origin: (origin: string | undefined, callback: (error: Error | null, success?: boolean) => void) => {
-    //null means no error - the first parameter is for errors, true means "allow this domain"
-    if ((origin && whitelist.indexOf(origin) !== -1) || !origin) callback(null, true); //in production use: if (origin && whitelist.indexOf(origin) !== -1) callback(null, true);
-    else callback(new Error("Not allowed by CORS!"));
-  },
-  optionsSuccessStatus: 200, // success status
-};
+// custom middleware logger, see implementation in middleware/logEvents.ts
+app.use(logger);
 
-app.use(logger); // custom middleware, see implementation in middleware/logEvents.ts
-app.use(cors(corsOptions)); //cors third party middleware
-app.use(express.urlencoded({ extended: false })); //urlencoded middleware for handling url encoded data- form data, build-in middleware
-app.use(express.json()); //json middleware to access json from a submission, build-in middleware
-app.use("/", express.static(path.join(__dirname, "/public"))); //static middleware to access static files, build-in middleware, if no path mentioned it defaults for "/"
-app.use("/subdir", express.static(path.join(__dirname, "/public"))); //tell express toi use the public folder for "/subdir" path also
+//cors third party middleware - Cross Origin Resource Sharing
+app.use(cors(corsOptions));
+
+//built-in middleware to handle urlencoded form data
+app.use(express.urlencoded({ extended: false }));
+
+//built-in middleware for json, enables us to access json from a submission
+app.use(express.json());
+
+///built-in middleware for to serve  static files from the public folder, if no path mentioned it defaults for "/"
+app.use("/", express.static(path.join(__dirname, "/public")));
+//tell express to use the public folder for "/subdir" path also
+app.use("/subdir", express.static(path.join(__dirname, "/public")));
 
 //#2.Routers#
 app.use("/", rootRouter);
 app.use("/subdir", subdirRouter); //
 app.use("/employees", employeesRouter); //doesnt need the static files middleware because an api serves json
 
-// #3.Unknow Routes Handler#
+// #3.Unknow Routes Handler# (catch all 404)
 // Option 1: Simple catch-all for unknown routes
 // app.get("/*", (req, res) => {
 //   res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
