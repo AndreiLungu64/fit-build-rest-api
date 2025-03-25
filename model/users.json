@@ -1,1 +1,4 @@
-[{"username":"walt1","password":"$2b$10$BgUfBtWwQjtCWWi.hXSWROVYlzxEcaSKJp.0H/fPUouKgHbZdJn6W"},{"username":"walt2","password":"$2b$10$f0/G7pO1ffVjAxSRdJlT5unYrd7sBPCNGtR7GFp6WeqPccgG5Yv76"}]
+[
+  { "username": "walt1", "password": "$2b$10$Ek95CSQUCAgab0KDsLhSCOm3bKhKRtmLDPwEBbBQ0ZDDaCD6BMc3e" },
+  { "username": "walt2", "password": "$2b$10$IQGyfa.eIYoGphRDpZ8CV.QmYCQa5QmAOwh4drKJ4sWxVxI3pf5Na" }
+]

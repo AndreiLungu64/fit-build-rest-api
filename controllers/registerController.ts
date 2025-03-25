@@ -10,9 +10,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 interface User {
-  username: string;
-  password: string;
-}
+    username: string;
+    password: string;
+    refreshToken? : string
+  }
 
 interface UserDB {
   users: User[];
