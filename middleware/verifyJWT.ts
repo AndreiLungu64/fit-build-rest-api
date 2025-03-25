@@ -35,7 +35,7 @@ const verifyJWT = (req: RequestWithUser, res: Response, next: NextFunction) => {
 
     //Extracting the username from the decoded JWT payload and attaching it to the request object
     /*The purpose is to make the authenticated user's identity available to all subsequent middleware and route handlers that process this request. Instead of decoding the token in multiple places, you decode it once in the middleware, and then any route handler can simply use req.user to know which user is making the request.*/
-    req.user = (decoded as JwtPayload).username;
+    req.user = typeof decoded === "string" ? decoded : (decoded as JwtPayload).username;
     next();
   });
 };
