@@ -12,6 +12,8 @@ import { corsOptions } from "./config/corsOptions.js";
 
 import rootRouter from "./routes/root.js";
 import employeesRouter from "./routes/api/employees.js";
+import registerRouter from "./routes/api/register.js";
+import authRouter from "./routes/api/auth.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -37,6 +39,8 @@ app.use("/", express.static(path.join(__dirname, "/public")));
 
 //#2.Routers#
 app.use("/", rootRouter);
+app.use("/register", registerRouter); //doesnt need the static files middleware because an api serves json
+app.use("/auth", authRouter); //doesnt need the static files middleware because an api serves json
 app.use("/employees", employeesRouter); //doesnt need the static files middleware because an api serves json
 
 // #3.Unknow Routes Handler# (catch all 404)
