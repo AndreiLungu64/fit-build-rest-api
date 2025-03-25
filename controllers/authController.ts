@@ -46,7 +46,7 @@ const handleLogin = async (req: Request, res : Response) => {
 
     //evaluate password
     const match = await bcrypt.compare(pwd, foundUser.password); // authorise the login
-    console.log(match);
+
     if(match) {
         //create JWTs
         const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
@@ -58,7 +58,7 @@ const handleLogin = async (req: Request, res : Response) => {
         }
 
         const accessToken = jwt.sign(
-            {"username" : foundUser.username},
+            {"username" : foundUser.username}, //payload - data embeded in the token
             accessTokenSecret,
             {expiresIn: '30s'} //5-15 min in production
         );
@@ -78,14 +78,11 @@ const handleLogin = async (req: Request, res : Response) => {
         usersDB.setUsers([...otherUses, currentUser]);
         await fsPromises.writeFile(path.join(__dirname, "..", "model", "users.json"), JSON.stringify(usersDB.users));
 
-
         //send the tokens to the frontend
         //send the accessToken as JSON
         res.json({accessToken})
-
         //send the refreshToken to the frontend as a httpOnly Cookie (not available to js)
         res.cookie("jwt", refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}) //the cookie will expire after 24
-
         // res.json({"message" : `User ${user} is logged in!`});
     }
     else{ 

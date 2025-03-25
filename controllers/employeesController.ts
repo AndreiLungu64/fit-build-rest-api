@@ -1,9 +1,5 @@
 import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
-
 import json from "../model/employees.json" with { type: "json" };
-import { rm } from "fs";
-import { parse } from "path";
-// const data: { employees: typeof json } = { employees: json };
 
 const data = {
     employees: json,
