@@ -148,3 +148,5 @@
 20250325	16:04:27	0064002d-6542-4966-9d20-896ecb819ca5	GET	undefined	/employees
 20250325	16:04:31	9cdc6b21-946c-4888-ab4c-b127ed3137f2	GET	undefined	/employees
 20250325	16:06:05	2bcfb755-642c-4e80-98f0-5427b5850af5	POST	undefined	/employees
+20250326	07:58:35	22b966c7-cee7-4ecb-99c4-edd1e0f81769	POST	undefined	/auth
+20250326	07:59:06	11470c85-ed3b-45f8-a78c-f473dd023063	POST	undefined	/auth

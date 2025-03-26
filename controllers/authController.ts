@@ -78,15 +78,17 @@ const handleLogin = async (req: Request, res : Response) => {
         usersDB.setUsers([...otherUses, currentUser]);
         await fsPromises.writeFile(path.join(__dirname, "..", "model", "users.json"), JSON.stringify(usersDB.users));
 
-        //send the tokens to the frontend
-        //send the accessToken as JSON
-        res.json({accessToken})
+
         //send the refreshToken to the frontend as a httpOnly Cookie (not available to js)
         //once the refresh token is send as a cookie it remains avalable as a cookie on the frontend till it expries
         /*So once the cookie is sent to the frontend after authorisation it remains avalable on the frontend till it expires. 
         For every subsequent request to your server/domain, the browser automatically attaches this cookie to the request headers.*/
         res.cookie("jwt", refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}) //the cookie will expire after 24
-        
+
+        //send the tokens to the frontend
+        //send the accessToken as JSON
+        res.json({accessToken})
+
         // res.json({"message" : `User ${user} is logged in!`});
     }
     else{ 
