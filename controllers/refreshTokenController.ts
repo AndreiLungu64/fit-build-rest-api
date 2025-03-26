@@ -68,7 +68,7 @@ const handleRefreshToken = (req: Request, res : Response) => {
             return;
         }
 
-        //if the decoded username match with the 
+        //if the decoded username match with the user's username create a new access token and send it to the frontend
         const accessToken = jwt.sign(
             {"username": decodedUsername},
             process.env.ACCESS_TOKEN_SECRET!,
@@ -81,3 +81,12 @@ const handleRefreshToken = (req: Request, res : Response) => {
 }
 
 export default {handleRefreshToken}
+
+
+/*
+The frontend application:
+Receive this JSON response
+Extract the access token value
+Store it (typically in state)
+Use it for future API requests by adding it to the Authorization header
+*/
