@@ -15,6 +15,8 @@ import employeesRouter from "./routes/api/employees.js";
 import registerRouter from "./routes/api/register.js";
 import authRouter from "./routes/api/auth.js";
 import refreshRouter from "./routes/api/refresh.js";
+import logoutRouter from "./routes/api/logout.js";
+
 import verifyJWT from "./middleware/verifyJWT.js";
 import cookieParser from "cookie-parser";
 
@@ -48,6 +50,7 @@ app.use("/", rootRouter);
 app.use("/register", registerRouter); //doesnt need the static files middleware because an api serves json
 app.use("/auth", authRouter); //doesnt need the static files middleware because an api serves json
 app.use("/refresh", refreshRouter); //this route is specifically designed to be called when a user's access token has expired or is invalid
+app.use("/logout", logoutRouter);
 app.use(verifyJWT); //require JWT authentication for every routes below this lines
 app.use("/employees", employeesRouter); //doesnt need the static files middleware because an api serves json
 

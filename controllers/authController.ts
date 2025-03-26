@@ -1,5 +1,4 @@
 import path from "path";
-import { fileURLToPath } from "url";
 import { Request, Response} from "express";
 import bcrypt from "bcrypt";
 
@@ -8,10 +7,12 @@ import jwt from "jsonwebtoken";
 import {config} from "dotenv";
 config();
 
-import json from "../model/users.json" with { type: "json" };
-
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
+
+import json from "../model/users.json" with { type: "json" };
 
 interface User {
   username: string;

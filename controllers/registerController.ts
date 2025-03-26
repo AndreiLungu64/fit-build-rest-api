@@ -1,7 +1,7 @@
 import fsPromises from "fs/promises";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
+import { Request, Response} from "express";
 import bcrypt from "bcrypt";
 
 import json from "../model/users.json" with { type: "json" };

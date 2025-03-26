@@ -1,16 +1,9 @@
-
-// import { fileURLToPath } from "url";
 import { Request, Response} from "express";
-
-
 import jwt, { JwtPayload } from "jsonwebtoken";
 import {config} from "dotenv";
 config();
 
 import json from "../model/users.json" with { type: "json" };
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
 
 interface User {
   username: string;
@@ -30,10 +23,11 @@ const usersDB: UserDB = {
   },
 };
 
+//in short, this sends the cookie to the backend to issue a new access token
 const handleRefreshToken = (req: Request, res : Response) => {
     const cookies = req.cookies;
     if (!cookies?.jwt) { //if no cookies or jwt
-      res.status(401);
+      res.sendStatus(401);
       return;
     }
     console.log(cookies.jwt);

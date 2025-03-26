@@ -150,3 +150,13 @@
 20250325	16:06:05	2bcfb755-642c-4e80-98f0-5427b5850af5	POST	undefined	/employees
 20250326	07:58:35	22b966c7-cee7-4ecb-99c4-edd1e0f81769	POST	undefined	/auth
 20250326	07:59:06	11470c85-ed3b-45f8-a78c-f473dd023063	POST	undefined	/auth
+20250326	08:02:19	e796b433-4a1b-4767-abdd-e7057cefa58c	POST	undefined	/auth
+20250326	08:02:57	054cb885-9be8-4e0e-b28e-725b61a4c8e7	GET	undefined	/refresh
+20250326	08:04:50	efea5935-17ac-499b-ad09-f076c1029c80	GET	undefined	/refresh
+20250326	08:04:51	0bbb4994-744c-4458-aab0-788cd5201739	GET	undefined	/refresh
+20250326	08:37:51	25e42a15-b373-4e10-b2ce-a826364b4456	POST	undefined	/auth
+20250326	08:39:12	8168b2e3-9680-4837-9791-ad8e5740c61f	POST	undefined	/auth
+20250326	08:39:36	47367666-4ad6-478e-902b-50480c7ab8a1	POST	undefined	/auth
+20250326	08:40:35	047c045b-ff68-4fc6-bf80-0d180758bf35	GET	undefined	/logout
+20250326	08:41:38	9db33347-c8e6-4abc-9666-e76d227dd1bf	GET	undefined	/refresh
+20250326	08:43:09	c07ee7f0-b720-4103-a9c4-538dc03b5d08	GET	undefined	/refresh
