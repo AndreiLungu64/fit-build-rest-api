@@ -28,6 +28,7 @@ const verifyJWT = (req: RequestWithUser, res: Response, next: NextFunction) => {
 
   //checks if the token is valid by verifying its signature using the access token secret
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!, (err, decoded) => {
+    //IF THE ACCESS TOKEN EXPIRES THIS IS THE POINT WHERE IT WILL FAIL
     if (err || !decoded) {
       res.sendStatus(403); //forbidden, invalid token, or error
       return;

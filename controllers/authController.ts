@@ -64,7 +64,7 @@ const handleLogin = async (req: Request, res : Response) => {
         );
 
         const refreshToken = jwt.sign(
-            refreshTokenSecret,
+            {"username" : foundUser.username},
             process.env.REFRESH_TOKEN_SECRET!,
             {expiresIn: '1d'} //24h in production
         );
@@ -83,6 +83,7 @@ const handleLogin = async (req: Request, res : Response) => {
         res.json({accessToken})
         //send the refreshToken to the frontend as a httpOnly Cookie (not available to js)
         res.cookie("jwt", refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}) //the cookie will expire after 24
+        
         // res.json({"message" : `User ${user} is logged in!`});
     }
     else{ 

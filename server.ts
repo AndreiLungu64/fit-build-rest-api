@@ -14,6 +14,8 @@ import rootRouter from "./routes/root.js";
 import employeesRouter from "./routes/api/employees.js";
 import registerRouter from "./routes/api/register.js";
 import authRouter from "./routes/api/auth.js";
+import verifyJWT from "./middleware/verifyJWT.js";
+import cookieParser from "cookie-parser";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -34,6 +36,9 @@ app.use(express.urlencoded({ extended: false }));
 //built-in middleware for json, enables us to access json from a submission
 app.use(express.json());
 
+//third-party middleware for cookies
+app.use(cookieParser());
+
 ///built-in middleware for to serve  static files from the public folder, if no path mentioned it defaults for "/"
 app.use("/", express.static(path.join(__dirname, "/public")));
 
@@ -41,6 +46,7 @@ app.use("/", express.static(path.join(__dirname, "/public")));
 app.use("/", rootRouter);
 app.use("/register", registerRouter); //doesnt need the static files middleware because an api serves json
 app.use("/auth", authRouter); //doesnt need the static files middleware because an api serves json
+app.use(verifyJWT); //require JWT authentication for every routes below this lines
 app.use("/employees", employeesRouter); //doesnt need the static files middleware because an api serves json
 
 // #3.Unknow Routes Handler# (catch all 404)
