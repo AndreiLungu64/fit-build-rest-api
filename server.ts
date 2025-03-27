@@ -30,8 +30,8 @@ const PORT = process.env.PORT || 3500;
 // custom middleware logger, see implementation in middleware/logEvents.ts
 app.use(logger);
 
-// Handle options credentials check - before CORS!
 // and fetch cookies credentials requirement
+//Handle options credentials check - must happen before CORS, otherwise CORS might reject requests before they even get to your credentials check
 app.use(credentials);
 
 //cors third party middleware - Cross Origin Resource Sharing

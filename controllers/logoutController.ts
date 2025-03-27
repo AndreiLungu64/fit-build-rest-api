@@ -54,7 +54,6 @@ const handleLogout = async (req: Request, res : Response) => {
     usersDB.setUsers([...otherUsers, currentUser])
     await fsPromises.writeFile(path.join(__dirname, '..', "model", "users.json"), JSON.stringify(usersDB.users));
 
-    //in production when you send and delete the cookie add secure:true -> only serves on https//TODO
     res.clearCookie("jwt", {httpOnly: true, sameSite:"none", secure: true});
     res.sendStatus(204);
 }
