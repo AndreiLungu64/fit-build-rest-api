@@ -4,17 +4,7 @@ import {config} from "dotenv";
 config();
 
 import json from "../model/users.json" with { type: "json" };
-
-interface User {
-  username: string;
-  password: string;
-  refreshToken? : string
-}
-
-interface UserDB {
-  users: User[];
-  setUsers: (data: User[]) => void;
-}
+import { User, UserDB } from "../types/globalTypes.js";
 
 const usersDB: UserDB = {
   users: json,

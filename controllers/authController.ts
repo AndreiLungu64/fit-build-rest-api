@@ -13,17 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 import json from "../model/users.json" with { type: "json" };
-
-interface User {
-  username: string;
-  password: string;
-  refreshToken? : string
-}
-
-interface UserDB {
-  users: User[];
-  setUsers: (data: User[]) => void;
-}
+import { User, UserDB } from "../types/globalTypes.js";
 
 const usersDB: UserDB = {
   users: json,
@@ -49,6 +39,7 @@ const handleLogin = async (req: Request, res : Response) => {
     const match = await bcrypt.compare(pwd, foundUser.password); // authorise the login, compare the hashed password with entered pasword
 
     if(match) {
+        const roles = Object.values(foundUser.roles);
         //create JWTs
         const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
         const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
@@ -58,9 +49,10 @@ const handleLogin = async (req: Request, res : Response) => {
         return;
         }
 
+        // {"username" : foundUser.username}, //payload - data embeded in the token, I replaced it with the user role
         const accessToken = jwt.sign(
-            {"username" : foundUser.username}, //payload - data embeded in the token
-            accessTokenSecret,
+            {"username" : foundUser.username},
+            process.env.ACCESS_TOKEN_SECRET!,
             {expiresIn: '30s'} //5-15 min in production
         );
 
@@ -84,7 +76,7 @@ const handleLogin = async (req: Request, res : Response) => {
         //once the refresh token is send as a cookie it remains avalable as a cookie on the frontend till it expries
         /*So once the cookie is sent to the frontend after authorisation it remains avalable on the frontend till it expires. 
         For every subsequent request to your server/domain, the browser automatically attaches this cookie to the request headers.*/
-        
+
         // sameSite allows cookies to be send with cross-site requests (with requests that come from other domains, like from your client)
         //secure:true setting for cookies means that the cookie will only be sent over HTTPS only
         res.cookie("jwt", refreshToken, {httpOnly: true, sameSite:"none", secure:true, maxAge: 24 * 60 * 60 * 1000}) 

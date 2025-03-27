@@ -9,16 +9,7 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-interface User {
-  username: string;
-  password: string;
-  refreshToken? : string
-}
-
-interface UserDB {
-  users: User[];
-  setUsers: (data: User[]) => void;
-}
+import { User, UserDB } from "../types/globalTypes.js";
 
 const usersDB: UserDB = {
   users: json,
