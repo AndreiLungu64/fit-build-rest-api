@@ -51,7 +51,12 @@ const handleLogin = async (req: Request, res : Response) => {
 
         // {"username" : foundUser.username}, //payload - data embeded in the token, I replaced it with the user role
         const accessToken = jwt.sign(
-            {"username" : foundUser.username},
+            { 
+                "userInfo": {
+                    "username" : foundUser.username,
+                    "roles" : roles,
+                }   
+            },
             process.env.ACCESS_TOKEN_SECRET!,
             {expiresIn: '30s'} //5-15 min in production
         );

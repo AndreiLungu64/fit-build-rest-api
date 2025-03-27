@@ -36,7 +36,7 @@ const handleNewUser = async (req: Request, res: Response) => {
     //encrypt the password
     const hashedPassword = await bcrypt.hash(pwd, 10); //hash the password and add 10 rounds of salts
 
-    const newUser = {
+    const newUser: User = {
         username: user,
         roles: {"User" : 2001},
         password: hashedPassword,

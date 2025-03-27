@@ -51,9 +51,15 @@ const handleRefreshToken = (req: Request, res : Response) => {
             return;
         }
 
+        const roles = Object.values(foundUser.roles); // Object.values({"user": 2002}) = [2002]
         //if the decoded username match with the user's username create a new access token and send it to the frontend
         const accessToken = jwt.sign(
-            {"username": decodedUsername},
+            { 
+                "userInfo": {
+                    "username" : foundUser.username,
+                    "roles" : roles,
+                }   
+            },
             process.env.ACCESS_TOKEN_SECRET!,
             {expiresIn: "30s"},
         );
