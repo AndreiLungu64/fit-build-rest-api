@@ -23,14 +23,13 @@ const usersDB: UserDB = {
   },
 };
 
-//in short, this sends the cookie to the backend to issue a new access token
+//in short, this sends the cookie from the frontend to the backend to issue a new access token
 const handleRefreshToken = (req: Request, res : Response) => {
     const cookies = req.cookies;
-    if (!cookies?.jwt) { //if no cookies or jwt
+    if (!cookies?.jwt) { //if no cookies or no jwt
       res.sendStatus(401);
       return;
     }
-    console.log(cookies.jwt);
     const refreshToken = cookies.jwt;
 
     const foundUser = usersDB.users.find(person => person.refreshToken === refreshToken);
@@ -47,15 +46,14 @@ const handleRefreshToken = (req: Request, res : Response) => {
         return;
         }
 
-    //evaluate jwt
+    //evaluate jwt -  cryptographic verification between the refreshToken and REFRESH_TOKEN_SECRET
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET!, (err: jwt.VerifyErrors | null, decoded: string | JwtPayload | undefined) => {
         if(err){
             res.sendStatus(403);//forbidden
             return;
         }
 
-        const decodedUsername = typeof decoded === "string" ? decoded : (decoded as JwtPayload).username;
-
+        const decodedUsername = (decoded as JwtPayload).username;
 
         if(foundUser.username !== decodedUsername) {
             res.sendStatus(403);//forbidden
