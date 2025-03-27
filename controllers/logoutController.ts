@@ -31,7 +31,7 @@ const handleLogout = async (req: Request, res : Response) => {
     //on client, also delete the accessToken //TODO
 
     const cookies = req.cookies;
-    if (!cookies?.jwt) { //if no cookies or jwt
+    if (!cookies?.jwt) { //if no cookies or no jwt
       res.sendStatus(204); //successful - no content to send back
       return;
     }

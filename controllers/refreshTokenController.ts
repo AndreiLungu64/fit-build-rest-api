@@ -53,6 +53,7 @@ const handleRefreshToken = (req: Request, res : Response) => {
             return;
         }
 
+        //decoded is the payload from the token that was originally created with jwt.sign()
         const decodedUsername = (decoded as JwtPayload).username;
 
         if(foundUser.username !== decodedUsername) {
