@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
+import { Request, Response, NextFunction } from "express";
 import { logEvents } from "./logEvents.js";
 
 export function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {

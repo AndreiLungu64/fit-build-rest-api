@@ -161,3 +161,6 @@
 20250326	08:41:38	9db33347-c8e6-4abc-9666-e76d227dd1bf	GET	undefined	/refresh
 20250326	08:43:09	c07ee7f0-b720-4103-a9c4-538dc03b5d08	GET	undefined	/refresh
 20250326	08:46:08	ae1bb36e-7ccc-416d-b04c-5d47e6a892b6	POST	undefined	/auth
+20250327	11:42:07	c578bab6-d631-4acf-9bd4-f3a8765e3bbe	POST	undefined	/register
+20250327	11:42:18	9903e9c2-2a22-44eb-b85f-ef82a6141158	POST	undefined	/auth
+20250327	11:42:30	bc276a28-7e93-4a3e-a5b6-7e515f9eed05	GET	undefined	/logout

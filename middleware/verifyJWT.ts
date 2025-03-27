@@ -15,7 +15,7 @@ interface RequestWithUser extends Request {
   user?: string | JwtPayload;
 }
 
-//verify if the access token attached in the request header is a valid one, if it is
+//verify if the access token attached in the request header is a valid one, if it is, let the request pass further with next()
 const verifyJWT = (req: RequestWithUser, res: Response, next: NextFunction) => {
   //accessing the bearer token (access token) from the authorisation header (a request has multiple headers authorisation contianing the bearer token)
   const authHeader = req.headers["authorization"];

@@ -27,6 +27,7 @@ const usersDB: UserDB = {
   },
 };
 
+//delete the access token from the cookie and from the db (but keeping the user and pass)
 const handleLogout = async (req: Request, res : Response) => {
     //on client, also delete the accessToken //TODO
 
@@ -39,8 +40,9 @@ const handleLogout = async (req: Request, res : Response) => {
 
     //check if the refreshToken is in the DB 
     const foundUser = usersDB.users.find(person => person.refreshToken === refreshToken);
-    if(!foundUser){//if no user, but a kookie, delete the kookie - but how is possible to have no user? //TODO
-        res.clearCookie("jwt", {httpOnly: true, maxAge: 24 * 60 * 60 * 1000});
+    //if no user, but a kookie, delete the kookie - is possible to have no user but a cookie if a user was deleted from the database but their cookie still exists in their browser
+    if(!foundUser){
+        res.clearCookie("jwt", {httpOnly: true, sameSite:"none", secure: true});
         res.sendStatus(203); //successful but no content to send back
         return;
     }
@@ -53,7 +55,7 @@ const handleLogout = async (req: Request, res : Response) => {
     await fsPromises.writeFile(path.join(__dirname, '..', "model", "users.json"), JSON.stringify(usersDB.users));
 
     //in production when you send and delete the cookie add secure:true -> only serves on https//TODO
-    res.clearCookie("jwt", {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}); 
+    res.clearCookie("jwt", {httpOnly: true, sameSite:"none", secure: true});
     res.sendStatus(204);
 }
 

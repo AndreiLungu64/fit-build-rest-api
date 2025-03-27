@@ -4,11 +4,14 @@ import { fileURLToPath } from "url";
 import path from "path";
 import { dirname } from "path";
 
-import { logger } from "./middleware/logEvents.js";
-import { errorHandler } from "./middleware/errorHandler.js";
-
 import cors from "cors";
 import { corsOptions } from "./config/corsOptions.js";
+import cookieParser from "cookie-parser";
+
+import { logger } from "./middleware/logEvents.js";
+import { errorHandler } from "./middleware/errorHandler.js";
+import { credentials } from "./middleware/credentials.js";
+import verifyJWT from "./middleware/verifyJWT.js";
 
 import rootRouter from "./routes/root.js";
 import employeesRouter from "./routes/api/employees.js";
@@ -16,9 +19,6 @@ import registerRouter from "./routes/api/register.js";
 import authRouter from "./routes/api/auth.js";
 import refreshRouter from "./routes/api/refresh.js";
 import logoutRouter from "./routes/api/logout.js";
-
-import verifyJWT from "./middleware/verifyJWT.js";
-import cookieParser from "cookie-parser";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -29,6 +29,10 @@ const PORT = process.env.PORT || 3500;
 //#1.Middlewares#
 // custom middleware logger, see implementation in middleware/logEvents.ts
 app.use(logger);
+
+// Handle options credentials check - before CORS!
+// and fetch cookies credentials requirement
+app.use(credentials);
 
 //cors third party middleware - Cross Origin Resource Sharing
 app.use(cors(corsOptions));
