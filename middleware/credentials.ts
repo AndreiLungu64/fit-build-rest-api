@@ -1,5 +1,5 @@
-import { allowedOrigins } from "../config/allowedOrigins.js";
-import { Request, Response, NextFunction } from "express";
+import { allowedOrigins } from '../config/allowedOrigins.js';
+import { Request, Response, NextFunction } from 'express';
 
 /*Together, these components (credentials middleware, corsOptions and adding {sameSite:"none", secure:true} to sending and deleting cookies)create a security system that lets your frontend website communicate with your API while blocking unauthorized websites from accessing it.*/
 
@@ -13,14 +13,18 @@ Without this header set to true, even if a browser sends a request with credenti
 function credentials(req: Request, res: Response, next: NextFunction) {
   const origin = req.headers.origin;
 
+  console.log('Incoming origin:', origin);
+  console.log('Allowed origins:', allowedOrigins);
+
   // no origin or not in allowed list
   if (!origin || !allowedOrigins.includes(origin)) {
-    res.status(403).json({ message: "Not allowed by CORS" });
+    res.status(403).json({ message: 'Not allowed by CORS' });
+    console.log('Credentials middleware didnt allowed this request');
     return;
   }
 
   // origin is allowed
-  res.header("Access-Control-Allow-Credentials", "true");
+  res.header('Access-Control-Allow-Credentials', 'true');
   next();
 }
 

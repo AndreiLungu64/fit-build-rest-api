@@ -1,6 +1,6 @@
-import { JwtPayload } from 'jsonwebtoken';
+import type { JwtPayload } from 'jsonwebtoken';
 
-//the recommended pattern in TypeScript is to modify the global Express namespace like below instead of the interface
+// the recommended pattern in TypeScript is to modify the global Express namespace like below instead of the interface
 declare global {
   namespace Express {
     interface Request {
@@ -11,8 +11,8 @@ declare global {
 }
 
 // Alternative:
-//redeffine the Request parameter to contain the user property (which it doesn't by default), use it everywhere instead of Request
-// interface RequestWithUserAndRoles extends Request {
-//   user?: string | JwtPayload;
-//   roles?: string | JwtPayload;
-// }
+// redeffine the Request parameter to contain the user property (which it doesn't by default), use it everywhere instead of Request
+interface RequestWithUserAndRoles extends Request {
+  user?: string | JwtPayload;
+  roles?: string | JwtPayload;
+}

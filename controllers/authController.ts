@@ -39,7 +39,8 @@ const handleLogin = async (req: Request, res : Response) => {
     const match = await bcrypt.compare(pwd, foundUser.password); // authorise the login, compare the hashed password with entered pasword
 
     if(match) {
-        const roles = Object.values(foundUser.roles);
+        const roles = Object.values(foundUser.roles);//array of the user roles codes, not actual roles [2002]
+        console.log();
         //create JWTs
         const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
         const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
@@ -61,6 +62,7 @@ const handleLogin = async (req: Request, res : Response) => {
             {expiresIn: '30s'} //5-15 min in production
         );
 
+        //no need to store the roles in refresh token, its only used to in accessToken genration
         const refreshToken = jwt.sign(
             {"username" : foundUser.username},
             process.env.REFRESH_TOKEN_SECRET!,
@@ -84,6 +86,7 @@ const handleLogin = async (req: Request, res : Response) => {
 
         // sameSite allows cookies to be send with cross-site requests (with requests that come from other domains, like from your client)
         //secure:true setting for cookies means that the cookie will only be sent over HTTPS only
+        //remove secure:true only when testing /refresh with thunderclient
         res.cookie("jwt", refreshToken, {httpOnly: true, sameSite:"none", secure:true, maxAge: 24 * 60 * 60 * 1000}) 
 
         //send the tokens to the frontend
