@@ -261,3 +261,13 @@
 20250331	13:38:12	b11a945c-8933-47ef-9338-0436d741c2c4	DELETE	http://localhost:3500	/employees
 20250331	13:38:19	42d752da-6ef2-4ec7-aaef-d7d294492c08	POST	http://localhost:3500	/auth
 20250331	13:38:27	9d086cdc-6662-4b8f-a196-aa66d4d9a7cb	DELETE	http://localhost:3500	/employees
+20250401	15:44:42	7c08e66c-b0c0-4a00-b84d-05de4c149636	POST	http://localhost:3500	/auth
+20250401	15:46:37	e2e6b581-673c-49db-b0d6-f98aabe87032	POST	http://localhost:3500	/auth
+20250401	15:46:45	eb36b230-cd0c-4f8b-b2a3-497973296be4	GET	http://localhost:3500	/employees
+20250401	15:47:10	834c0b7a-7b95-4d46-b8f1-68f5afd1e450	GET	http://localhost:3500	/employees
+20250401	15:47:13	1c50dbb4-5480-42ba-988b-d6c60156239c	POST	http://localhost:3500	/auth
+20250401	15:47:17	270d14af-5174-4b2a-aa44-60854bb257fe	GET	http://localhost:3500	/employees
+20250401	15:47:28	cfe8b050-25d7-4b65-b335-7809a683b370	GET	http://localhost:3500	/employees
+20250401	15:47:49	1ab7cb02-b996-466c-bd0e-f0f9853fdeb3	POST	http://localhost:3500	/employees
+20250401	15:48:00	7099f509-c9cd-4d34-a220-62d6296a2531	POST	http://localhost:3500	/auth
+20250401	15:48:07	49ee7d67-880b-43e3-bcdb-dafa07422eb0	POST	http://localhost:3500	/employees
