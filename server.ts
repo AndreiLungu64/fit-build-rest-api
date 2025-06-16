@@ -22,6 +22,7 @@ import logoutRouter from './routes/api/logout.js';
 import dotenv from 'dotenv';
 dotenv.config();
 import initializeDatabase from './db/init.js';
+import exercisesRouter from './routes/api/exercises.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -38,7 +39,7 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3500;
 
-//#1.Middlewares#
+//1.Middleware (first)
 // custom middleware logger, see implementation in middleware/logEvents.ts
 app.use(logger);
 
@@ -61,12 +62,13 @@ app.use(cookieParser());
 ///built-in middleware for to serve  static files from the public folder, if no path mentioned it defaults for "/"
 app.use('/', express.static(path.join(__dirname, '/public')));
 
-//#2.Routers#
+//2.Routers (second)
 app.use('/', rootRouter);
 app.use('/register', registerRouter); //doesnt need the static files middleware because an api serves json
 app.use('/auth', authRouter); //doesnt need the static files middleware because an api serves json
 app.use('/refresh', refreshRouter); //this route is specifically designed to be called when a user's access token has expired or is invalid
 app.use('/logout', logoutRouter);
+app.use('/api/exercises', exercisesRouter);
 app.use(verifyJWT); //require JWT authentication for every routes below this lines
 app.use('/employees', employeesRouter); //doesnt need the static files middleware because an api serves json
 

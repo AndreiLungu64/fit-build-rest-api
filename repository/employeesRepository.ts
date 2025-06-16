@@ -62,7 +62,6 @@ class EmployeeRepository {
     return result.rows.length ? result.rows[0] : null;
   }
 
-  // Delete an employee
   async delete(id: number): Promise<boolean> {
     const result = await query('DELETE FROM employees WHERE id = $1', [id]);
     return result.rowCount ? result.rowCount > 0 : false;
